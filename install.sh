@@ -4,10 +4,10 @@ dokku apps:create vpn
 sudo -u dokku mkdir /var/lib/dokku/data/storage/vpn
 dokku storage:mount vpn /var/lib/dokku/data/storage/vpn:/etc/openvpn
 
-git remote add dokku self:vpn
+git remote add dokku dokku@self:vpn
 git push dokku master
 
-dokku run vpn ovpn_genconfig -u udp://yourvpn.example.org
+dokku run vpn ovpn_genconfig -u udp://nugraha.xyz
 
 # Generate self-signed certificate
 # Remember the password!
@@ -31,4 +31,6 @@ dokku ps:set-restart-policy vpn always
 dokku ps:scale vpn vpn=1
 
 # Generate client profile
-dokku run vpn easyrsa build-client-full your-client-name nopass
+dokku run vpn easyrsa build-client-full android nopass
+dokku run vpn easyrsa build-client-full linux nopass
+dokku run vpn easyrsa build-client-full windows nopass
